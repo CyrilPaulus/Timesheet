@@ -25,7 +25,7 @@ namespace PrestationApi.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<CodeChantier>> Get()
         {
-            return _codeChantierLogic.GetAll().ToList();
+            return _codeChantierLogic.GetAll().OrderBy(x => x.Code).ToList();
         }
 
         // GET api/values/5

@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Création utilisateur</h2>
+<mat-dialog-content [formGroup]="form">
+
+  <mat-form-field>
+    <input matInput placeholder="Code" formControlName="code" required>
+    <mat-error *ngIf="code.invalid && (code.dirty || code.touched)">
+      <span *ngIf="code.errors.required">Ce champ est requis.</span>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Prénom" formControlName="firstName" required>
+    <mat-error *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+      <span *ngIf="firstName.errors.required">Ce champ est requis.</span>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Nom" formControlName="lastName" required>
+    <mat-error *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+      <span *ngIf="lastName.errors.required">Ce champ est requis.</span>
+    </mat-error>
+  </mat-form-field>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button (click)="save()" [disabled]="!form.valid">Save</button>
+</mat-dialog-actions>

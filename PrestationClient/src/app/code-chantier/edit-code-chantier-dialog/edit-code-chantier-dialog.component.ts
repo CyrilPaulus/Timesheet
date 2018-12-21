@@ -21,7 +21,7 @@ export class EditCodeChantierDialogComponent implements OnInit {
   }
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) private codeChantier: CodeChantier,
+    @Inject(MAT_DIALOG_DATA) public codeChantier: CodeChantier,
     private dialogRef: MatDialogRef<EditCodeChantierDialogComponent>,
     private codeChantierService: CodeChantierService
   ) {

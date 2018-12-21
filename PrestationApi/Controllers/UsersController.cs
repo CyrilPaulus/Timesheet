@@ -10,11 +10,11 @@ namespace PrestationApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly UserLogic _userLogic;
 
-        public UserController(
+        public UsersController(
             UserLogic userLogic
         )
         {
@@ -25,7 +25,7 @@ namespace PrestationApi.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<User>> Get()
         {
-            return _userLogic.GetAll().ToList();
+            return _userLogic.GetAll().OrderBy(x => x.Code).ToList();
         }
 
         // GET api/values/5

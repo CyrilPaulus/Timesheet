@@ -21,6 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CreateCodeChantierDialogComponent } from './code-chantier/create-code-chantier-dialog/create-code-chantier-dialog.component';
 import { ConfirmDialogComponent } from './dialogs/confirm-dialog/confirm-dialog.component';
 import { DialogService } from './dialogs/dialog.service';
+import { CreateUserDialogComponent } from './user/create-user-dialog/create-user-dialog.component';
+import { EditUserDialogComponent } from './user/edit-user-dialog/edit-user-dialog.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { DialogService } from './dialogs/dialog.service';
     UserComponent,
     EditCodeChantierDialogComponent,
     CreateCodeChantierDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    CreateUserDialogComponent,
+    EditUserDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +57,9 @@ import { DialogService } from './dialogs/dialog.service';
   entryComponents: [
     EditCodeChantierDialogComponent,
     CreateCodeChantierDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    CreateUserDialogComponent,
+    EditUserDialogComponent
   ]
 })
 export class AppModule { }

@@ -1,3 +1,50 @@
-<p>
-  user works!
-</p>
+<div class="header">
+  <h1>Utilisateurs
+    <button mat-button (click)="create()">
+      <mat-icon>add_circle</mat-icon>&nbsp;Create
+    </button>
+  </h1>
+
+</div>
+<div class="filter">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+</div>
+
+<mat-table matSort mat-table [dataSource]="dataSource">
+
+  <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+
+  <ng-container matColumnDef="code">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Code </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.code}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="firstName">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Prénom </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="lastName">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef class="actions">Actions</mat-header-cell>
+    <mat-cell *matCellDef="let element" class="actions">
+      <button mat-button (click)="edit(element)">
+        <mat-icon>edit</mat-icon>&nbsp;Edit
+      </button>
+      <button mat-button (click)="delete(element)">
+        <mat-icon>delete</mat-icon>&nbsp;Delete
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="columns; sticky: true"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: columns;"></mat-row>
+</mat-table>
