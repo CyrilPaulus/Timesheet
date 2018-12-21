@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Editing {{codeChantier.code}}</h2>
+<mat-dialog-content [formGroup]="form">
+  <mat-form-field>
+    <input matInput placeholder="Code" formControlName="code" required>
+    <mat-error *ngIf="code.invalid && (code.dirty || code.touched)">
+      <span *ngIf="code.errors.required">Ce champ est requis.</span>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput placeholder="Description" formControlName="description" required></textarea>
+    <mat-error *ngIf="description.invalid && (description.dirty || description.touched)">
+      <span *ngIf="description.errors.required">Ce champ est requis.</span>
+    </mat-error>
+  </mat-form-field>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button (click)="save()" [disabled]="!form.valid">Save</button>
+</mat-dialog-actions>

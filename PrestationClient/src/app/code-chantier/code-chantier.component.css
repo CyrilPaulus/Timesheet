@@ -1,0 +1,17 @@
+
+table {
+    width: 100%;
+}
+
+.actions {
+    max-width: 200px;
+    width: 200px;
+}
+
+.filter {
+    padding: 20px;
+}
+
+.filter > mat-form-field {
+    width: 100%;
+}
