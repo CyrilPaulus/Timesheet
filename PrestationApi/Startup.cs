@@ -42,10 +42,6 @@ namespace PrestationApi
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseHsts();
-            }
 
             app.UseCors(builder => builder
                     .AllowAnyOrigin()
@@ -64,8 +60,16 @@ namespace PrestationApi
                 }
             });
 
-            app.UseHttpsRedirection();
             app.UseMvc();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
+            using (var context = new PrestationDbContext())
+            {
+                context.Database.EnsureCreated();
+            }
         }
+
+
     }
 }
