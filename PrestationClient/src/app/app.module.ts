@@ -11,6 +11,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { CodeChantierComponent } from './code-chantier/code-chantier.component';
 import { PrestationComponent } from './prestation/prestation.component';
 import { UserComponent } from './user/user.component';
@@ -23,6 +24,10 @@ import { ConfirmDialogComponent } from './dialogs/confirm-dialog/confirm-dialog.
 import { DialogService } from './dialogs/dialog.service';
 import { CreateUserDialogComponent } from './user/create-user-dialog/create-user-dialog.component';
 import { EditUserDialogComponent } from './user/edit-user-dialog/edit-user-dialog.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { DayDetailComponent } from './prestation/day-detail/day-detail.component';
+import { AddPrestationDialogComponent } from './prestation/day-detail/add-prestation-dialog/add-prestation-dialog.component';
+import { DurationPipe } from './prestation/duration.pipe';
 
 
 @NgModule({
@@ -35,7 +40,10 @@ import { EditUserDialogComponent } from './user/edit-user-dialog/edit-user-dialo
     CreateCodeChantierDialogComponent,
     ConfirmDialogComponent,
     CreateUserDialogComponent,
-    EditUserDialogComponent
+    EditUserDialogComponent,
+    DayDetailComponent,
+    AddPrestationDialogComponent,
+    DurationPipe,
   ],
   imports: [
     BrowserModule,
@@ -50,16 +58,19 @@ import { EditUserDialogComponent } from './user/edit-user-dialog/edit-user-dialo
     ReactiveFormsModule,
     MatInputModule,
     MatSortModule,
+    MatExpansionModule,
+    MatAutocompleteModule,
     CoreModule
   ],
-  providers: [DialogService],
+  providers: [DialogService, DurationPipe],
   bootstrap: [AppComponent],
   entryComponents: [
     EditCodeChantierDialogComponent,
     CreateCodeChantierDialogComponent,
     ConfirmDialogComponent,
     CreateUserDialogComponent,
-    EditUserDialogComponent
+    EditUserDialogComponent,
+    AddPrestationDialogComponent
   ]
 })
 export class AppModule { }

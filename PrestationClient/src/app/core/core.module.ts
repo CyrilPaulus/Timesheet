@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CodeChantierService } from './code-chantier.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './user.service';
+import { PrestationService } from './prestation.service';
 
 @NgModule({
   declarations: [],
@@ -12,7 +13,8 @@ import { UserService } from './user.service';
   ],
   providers: [
     CodeChantierService,
-    UserService
+    UserService,
+    PrestationService
   ]
 })
 export class CoreModule { }

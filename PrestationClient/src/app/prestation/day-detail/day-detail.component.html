@@ -1,0 +1,40 @@
+<mat-table mat-table [dataSource]="dataSource">
+
+  <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+
+  <ng-container matColumnDef="code">
+    <mat-header-cell *matHeaderCellDef> Code </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.codeChantier}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="duration">
+    <mat-header-cell *matHeaderCellDef> Durée </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.duration | duration}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef class="actions">Actions</mat-header-cell>
+    <mat-cell *matCellDef="let element" class="actions">
+      <button mat-button (click)="edit(element)">
+        <mat-icon>edit</mat-icon>&nbsp;Edit
+      </button>
+      <button mat-button (click)="delete(element)">
+        <mat-icon>delete</mat-icon>&nbsp;Delete
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="columns "></mat-header-row>
+  <mat-row *matRowDef="let row; columns: columns;"></mat-row>
+</mat-table>
+
+<button mat-button (click)="addPrestation()" class="add-prestation">
+  <mat-icon>add_circle</mat-icon>&nbsp;Ajouter une prestation
+</button>

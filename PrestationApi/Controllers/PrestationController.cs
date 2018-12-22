@@ -39,11 +39,22 @@ namespace PrestationApi.Controllers
             return cc;
         }
 
+        [HttpGet("user/{userId}/{year}/{month}")]
+        public ActionResult<IEnumerable<Prestation>> GetUserMonth(int userId, int year, int month, int id)
+        {
+            var prestations = _prestationLogic.GetAll();
+
+            prestations = prestations.Where(x => x.UserId == userId);
+            prestations = prestations.Where(x => x.Date.Year == year && x.Date.Month == month);
+
+            return prestations.ToList();
+        }
+
         // POST api/values
         [HttpPost]
         public ActionResult<Prestation> Post([FromBody] Prestation newPrestation)
         {
-            var user = _prestationLogic.Add(newPrestation.CodeChantierId, newPrestation.Date, newPrestation.Duration, newPrestation.Description);
+            var user = _prestationLogic.Add(newPrestation.CodeChantierId, newPrestation.UserId, newPrestation.Date, newPrestation.Duration, newPrestation.Description);
             return CreatedAtAction("Get", new { code = newPrestation.Id }, user);
         }
 

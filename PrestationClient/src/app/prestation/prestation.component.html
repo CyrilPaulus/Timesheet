@@ -1,3 +1,33 @@
-<p>
-  prestation works!
-</p>
+<div class="header">
+  <h1>Prestations de {{currentMonth?.name}} {{currentYear}}
+  </h1>
+</div>
+
+<div class="months">
+  <button mat-button color="{{getColor(month)}}" *ngFor="let month of months" (click)="selectMonth(month)">
+    {{month.name}}
+  </button>
+</div>
+
+<div class="weeks">
+  <mat-accordion *ngFor="let week of weeks" class="week">
+    <div class="week-label">Semaine {{getWeekNumber(week)}}</div>
+    <mat-expansion-panel *ngFor="let day of week.days">
+      <mat-expansion-panel-header [class.is-current]="day.current">
+        <mat-panel-title>
+          {{day.name}} {{day.date | date:'dd'}}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{day.getTotalDuration() | duration}}
+          <span *ngIf="day.getTotalDuration() === 0" title="Pas de prestations enregistrées pour ce jour">
+            <mat-icon>warning</mat-icon>
+          </span>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <ng-template matExpansionPanelContent>
+        <app-day-detail [day]="day" [user]="user"></app-day-detail>
+      </ng-template>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

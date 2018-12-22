@@ -40,9 +40,10 @@ namespace PrestationApi.Logic
             _db.SaveChanges();
         }
 
-        public Prestation Add(string code, DateTime date, int duration, string description, bool commit = true)
+        public Prestation Add(string code, int userId, DateTime date, int duration, string description, bool commit = true)
         {
             var prestation = new Prestation();
+            prestation.UserId = userId;
             prestation.CodeChantierId = code;
             prestation.Date = date;
             prestation.Duration = duration;

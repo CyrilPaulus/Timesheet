@@ -1,0 +1,39 @@
+<h2 mat-dialog-title *ngIf="!prestation">Ajout d'une prestation</h2>
+<h2 mat-dialog-title *ngIf="prestation">Edition d'une prestation</h2>
+<mat-dialog-content [formGroup]="form">
+
+  <mat-form-field>
+    <textarea matInput placeholder="Durée" formControlName="duration" required></textarea>
+    <mat-error *ngIf="duration.invalid && (duration.dirty || duration.touched)">
+      <span *ngIf="duration.errors.required">Ce champ est requis.</span>
+      <span *ngIf="duration.errors.duration">Format invalide : ex 1.75, 1h25, 10h10-12h30.</span>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="text" placeholder="Code chantier" aria-label="Number" matInput formControlName="codeChantier"
+      [matAutocomplete]="auto" required>
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option.code">
+        {{option.code}}
+      </mat-option>
+    </mat-autocomplete>
+    <mat-error *ngIf="codeChantier.invalid && (codeChantier.dirty || codeChantier.touched)">
+      <span *ngIf="codeChantier.errors.required">Ce champ est requis.</span>
+      <span *ngIf="codeChantier.errors.missing">Valeur invalide.</span>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput placeholder="Description" formControlName="description" required></textarea>
+    <mat-error *ngIf="description.invalid && (description.dirty || description.touched)">
+      <span *ngIf="description.errors.required">Ce champ est requis.</span>
+    </mat-error>
+  </mat-form-field>
+
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Annuler</button>
+  <button mat-button (click)="save()" [disabled]="!form.valid">Ajouter</button>
+</mat-dialog-actions>

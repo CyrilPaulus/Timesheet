@@ -1,0 +1,48 @@
+.months {
+    display: flex;
+    justify-content: space-evenly;
+    flex-shrink: 0;
+}
+
+.week {
+    margin-bottom: 25px;
+    display: block;
+}
+
+:host {
+    
+    display: flex;
+    flex-direction: column
+}
+
+.weeks {
+    flex-grow: 1;
+    overflow: auto;
+    padding: 20px;
+    padding-bottom: 90px;
+}
+
+.week-label {
+    font-size: 14px;
+    color: rgb(97, 97, 97);
+    margin-top: 20px;
+    margin-bottom: 8px;
+    padding-left: 24px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+mat-panel-title {
+    flex-grow: 0;
+}
+
+mat-panel-description {
+    flex-grow: 0;
+}
+
+/deep/ .mat-content {
+    justify-content: space-between;
+}
+
+.is-current {
+    background-color: #FFC107;
+}
