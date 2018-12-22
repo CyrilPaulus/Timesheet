@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -13,12 +14,17 @@ namespace PrestationApi.Controllers
     public class PrestationController : ControllerBase
     {
         private readonly PresationLogic _prestationLogic;
-
+        private readonly ExcelExporterLogic _excelExporterLogic;
+        private readonly UserLogic _userLogic;
         public PrestationController(
-            PresationLogic prestationLogic
+            PresationLogic prestationLogic,
+            ExcelExporterLogic excelExporterLogic,
+            UserLogic userLogic
         )
         {
             _prestationLogic = prestationLogic;
+            _excelExporterLogic = excelExporterLogic;
+            _userLogic = userLogic;
         }
 
         // GET api/values
@@ -48,6 +54,22 @@ namespace PrestationApi.Controllers
             prestations = prestations.Where(x => x.Date.Year == year && x.Date.Month == month);
 
             return prestations.ToList();
+        }
+
+        [HttpGet("export/{userId}/{year}")]
+        public ActionResult Export(int userId, int year)
+        {
+            var user = _userLogic.GetById(userId);
+            var prestations = _prestationLogic.GetAll();
+
+
+            prestations = prestations.Where(x => x.UserId == userId);
+            prestations = prestations.Where(x => x.Date.Year == year);
+
+
+            var memory = _excelExporterLogic.ExportExcel(prestations, year);
+            var filename = string.Format("{0}_Prestations_{1}.xlsx", user.Code, year);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", filename);
         }
 
         // POST api/values

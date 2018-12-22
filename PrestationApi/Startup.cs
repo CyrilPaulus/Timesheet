@@ -31,10 +31,13 @@ namespace PrestationApi
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<PrestationDbContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+                options
+                .UseLazyLoadingProxies()
+                .UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<CodeChantierLogic>();
             services.AddScoped<UserLogic>();
             services.AddScoped<PresationLogic>();
+            services.AddScoped<ExcelExporterLogic>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

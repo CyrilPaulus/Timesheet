@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Prestation, PrestationService } from '../core/prestation.service';
 import { UserService, User } from '../core/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-prestation',
@@ -198,6 +199,10 @@ export class PrestationComponent implements OnInit {
         total += day.getTotalDuration();
     }
     return total;
+  }
+
+  public getExportUrl(): string {
+    return environment.api_url + `prestation/export/${this.user.id}/${this.currentYear}`;
   }
 
 }

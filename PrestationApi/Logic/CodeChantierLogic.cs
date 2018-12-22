@@ -97,10 +97,7 @@ namespace PrestationApi.Logic
                 var description = row.GetCell(columnMap["Libellé"]).ToString();
 
                 if (string.IsNullOrWhiteSpace(code))
-                {
-                    finished = true;
-                    break;
-                }
+                    continue;
 
                 var cc = _db.CodesChantier.Find(code);
                 if (cc != null)

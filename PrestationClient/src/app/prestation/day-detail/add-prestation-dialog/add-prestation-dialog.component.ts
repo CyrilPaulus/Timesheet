@@ -117,7 +117,7 @@ export class AddPrestationDialogComponent implements OnInit {
 
   private parseDuration(value: string): number {
     if (!isNaN(<any>value))
-      return parseFloat(value);
+      return Math.floor(parseFloat(value) * 60);
 
     let hourReg = /^(\d+)h(\d+)$/;
     let matches = value.match(hourReg);
