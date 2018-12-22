@@ -54,7 +54,8 @@ export class UserService {
       json.id,
       json.code,
       json.firstName,
-      json.lastName
+      json.lastName,
+      new Date(json.creationDate)
     );
   }
 
@@ -66,7 +67,8 @@ export class User {
     public id: number,
     public code: string,
     public firstName: string,
-    public lastName: string
+    public lastName: string,
+    public creationDate: Date
   ) {
 
   }

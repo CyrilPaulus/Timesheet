@@ -1,10 +1,33 @@
 <div class="header">
-  <h1>Prestations de {{currentMonth?.name}} {{currentYear}}
-  </h1>
+  <div class="header-content">
+    <h1>Prestations de
+
+      <mat-select [(ngModel)]="user" (ngModelChange)="onUserChanged()">
+        <mat-option *ngFor="let user of users" [value]="user">
+          {{user.code}}
+        </mat-option>
+      </mat-select>
+
+      pour {{currentMonth?.name}}
+
+      <mat-select [(ngModel)]="currentYear" (ngModelChange)="onCurrentYearChanged()">
+        <mat-option *ngFor="let year of years" [value]="year">
+          {{year}}
+        </mat-option>
+      </mat-select>
+    </h1>
+  </div>
+  <div class="month-total">
+    <h1>
+      {{getTotal() | duration}}
+    </h1>
+  </div>
+
+
 </div>
 
 <div class="months">
-  <button mat-button color="{{getColor(month)}}" *ngFor="let month of months" (click)="selectMonth(month)">
+  <button mat-button color="{{getColor(month)}}" *ngFor="let month of months" routerLink="/prestations/{{user?.code}}/{{currentYear}}/{{month.index +1}}">
     {{month.name}}
   </button>
 </div>

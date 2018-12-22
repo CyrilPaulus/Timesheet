@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Prestation, PrestationService } from '../core/prestation.service';
 import { UserService, User } from '../core/user.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-prestation',
@@ -14,6 +15,8 @@ export class PrestationComponent implements OnInit {
 
   public weeks: Week[] = [];
   public user: User;
+  public users: User[];
+  public years: number[] = [];
 
   public months = [
     new Month('Janvier', 0),
@@ -33,16 +36,60 @@ export class PrestationComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private presationService: PrestationService
+    private presationService: PrestationService,
+    private route: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit() {
-    this.userService.getAll().subscribe(x => {
-      this.user = x[0];
+    this.route.params.subscribe(params => {
 
-      var d = new Date();
-      this.selectMonth(this.months.find(x => x.index == d.getMonth()));
+      let userCode = params['user'];
+      this.userService.getAll().subscribe(users => {
+        this.users = users;
+        if (!userCode)
+          this.user = users[0];
+        else
+          this.user = users.find(x => x.code.toLowerCase() === userCode.toLowerCase());
+
+        this.years = this.getYears(this.user);
+        let currentYear = params['year'];
+        if (!currentYear)
+          currentYear = new Date().getFullYear();
+        else
+          currentYear = parseInt(currentYear);
+        this.currentYear = currentYear;
+        if (!this.years.find(x => x == currentYear))
+          this.currentYear = this.years[0];
+
+        let month = params['month'];
+        if (!month) {
+          var d = new Date();
+          month = d.getMonth();
+        } else {
+          month = parseInt(month) - 1;
+        }
+
+
+        this.selectMonth(this.months.find(x => x.index == month));
+      });
     });
+  }
+
+  public getYears(user: User): number[] {
+    let rtn = [];
+    for (let i = new Date().getFullYear(); i >= user.creationDate.getFullYear() - 1; i--) {
+      rtn.push(i);
+    }
+    return rtn;
+  }
+
+  public onUserChanged() {
+    this.router.navigateByUrl(`/prestations/${this.user.code}/${this.currentYear}/${this.currentMonth.index + 1}`);
+  }
+
+  public onCurrentYearChanged() {
+    this.router.navigateByUrl(`/prestations/${this.user.code}/${this.currentYear}/${this.currentMonth.index + 1}`);
   }
 
   public selectMonth(month: Month) {
@@ -82,6 +129,8 @@ export class PrestationComponent implements OnInit {
 
   public getDays(month: number, year: number): Week[] {
 
+    let currentYear = new Date().getFullYear();
+    let currentMonth = new Date().getMonth();
     let currentDay = new Date().getDate();
     let numberOfDays = new Date(year, month + 1, 0).getDate();
 
@@ -102,7 +151,7 @@ export class PrestationComponent implements OnInit {
         weeks.push(currentWeek);
       }
 
-      currentWeek.days.push(new Day(dayName, date, currentDay === day));
+      currentWeek.days.push(new Day(dayName, date, currentDay === day && currentMonth === month && currentYear === year));
     }
 
     return weeks;
@@ -140,6 +189,15 @@ export class PrestationComponent implements OnInit {
     var weekNo = Math.ceil((((<any>d - <any>yearStart) / 86400000) + 1) / 7);
     // Return array of year and week number
     return weekNo;
+  }
+
+  public getTotal(): number {
+    let total = 0;
+    for (let week of this.weeks) {
+      for (let day of week.days)
+        total += day.getTotalDuration();
+    }
+    return total;
   }
 
 }

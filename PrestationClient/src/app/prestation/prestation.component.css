@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-evenly;
     flex-shrink: 0;
+    flex-wrap: wrap;
 }
 
 .week {
@@ -45,4 +46,26 @@ mat-panel-description {
 
 .is-current {
     background-color: #FFC107;
+}
+
+mat-select {
+    width: 65px;
+}
+
+/deep/ .mat-select-arrow,
+/deep/ .mat-select-value {
+    color: white;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+}
+
+.header-content {
+    flex-grow: 1;
+}
+
+.month-total {
+    flex-shrink: 0;
 }
