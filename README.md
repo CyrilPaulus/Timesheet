@@ -1,6 +1,6 @@
-# Prestations
+# Timesheets
 
-A simple application to handle prestations inside a company.
+A simple application to handle timesheets inside a company.
 The server is made using **ASP.NET Core 2.2** and the client uses **Angular 7**. 
 
 ## How to run
