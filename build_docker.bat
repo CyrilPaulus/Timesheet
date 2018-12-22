@@ -1,1 +1,1 @@
-docker build -t prestation .
+docker build -t prestations .
