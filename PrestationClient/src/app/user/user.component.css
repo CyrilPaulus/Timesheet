@@ -1,4 +1,9 @@
 
+:host {
+    display: flex;
+    flex-direction: column;
+}
+
 table {
     width: 100%;
 }
@@ -14,4 +19,12 @@ table {
 
 .filter > mat-form-field {
     width: 100%;
+}
+
+.users {
+    flex-grow: 1;
+    overflow: auto;    
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 90px;
 }

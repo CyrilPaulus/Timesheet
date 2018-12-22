@@ -8,6 +8,7 @@ import { EditCodeChantierDialogComponent } from './edit-code-chantier-dialog/edi
 import { CreateCodeChantierDialogComponent } from './create-code-chantier-dialog/create-code-chantier-dialog.component';
 import { DialogService } from '../dialogs/dialog.service';
 import { MatSort } from '@angular/material/sort';
+import { ImportCodeChantierDialogComponent } from './import-code-chantier-dialog/import-code-chantier-dialog.component';
 
 @Component({
   selector: 'app-code-chantier',
@@ -17,7 +18,7 @@ import { MatSort } from '@angular/material/sort';
 export class CodeChantierComponent implements OnInit {
 
   public dataSource = new MatTableDataSource<CodeChantier>();
-  public columns: string[] = ['code', 'description', 'actions'];
+  public columns: string[] = ['code', 'description', 'client', 'produit', 'actions'];
 
   @ViewChild(MatTable)
   public table: MatTable<CodeChantier>;
@@ -52,6 +53,16 @@ export class CodeChantierComponent implements OnInit {
 
   public create() {
     let dialogRef = this.dialog.open(CreateCodeChantierDialogComponent, {
+      width: '400px'
+    });
+
+    dialogRef.afterClosed().subscribe(x => {
+      this.refresh();
+    });
+  }
+
+  public import() {
+    let dialogRef = this.dialog.open(ImportCodeChantierDialogComponent, {
       width: '400px'
     });
 

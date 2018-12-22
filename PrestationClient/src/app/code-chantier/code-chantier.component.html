@@ -1,7 +1,10 @@
 <div class="header">
   <h1>Codes chantier
     <button mat-button (click)="create()">
-      <mat-icon>add_circle</mat-icon>&nbsp;Create
+      <mat-icon>add_circle</mat-icon>&nbsp;Créer
+    </button>
+    <button mat-button (click)="import()">
+      <mat-icon>import_export</mat-icon>&nbsp;Importer
     </button>
   </h1>
 
@@ -12,20 +15,30 @@
   </mat-form-field>
 </div>
 
-<mat-table matSort mat-table [dataSource]="dataSource">
+<mat-table class="codeschantier" matSort mat-table [dataSource]="dataSource">
 
   <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
 
 
   <ng-container matColumnDef="code">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Code </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.code}} </mat-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header class="code"> Code </mat-header-cell>
+    <mat-cell *matCellDef="let element" class="code"> {{element.code}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="description">
     <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="client">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Client </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.client}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="produit">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Produit </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.produit}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="actions">

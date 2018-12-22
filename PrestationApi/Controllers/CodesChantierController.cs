@@ -51,7 +51,7 @@ namespace PrestationApi.Controllers
                     error = string.Format("The code `{0}` is already used", newCc.Code)
                 });
 
-            cc = _codeChantierLogic.Add(newCc.Code, newCc.Description);
+            cc = _codeChantierLogic.Add(newCc.Code, newCc.Description, newCc.Client, newCc.Produit);
             return CreatedAtAction("Get", new { code = newCc.Code }, cc);
         }
 
@@ -70,7 +70,7 @@ namespace PrestationApi.Controllers
                     error = string.Format("The code `{0}` is already used", value.Code)
                 });
 
-            cc = _codeChantierLogic.Update(cc, value.Code, value.Description);
+            cc = _codeChantierLogic.Update(cc, value.Code, value.Description, value.Client, value.Produit);
             return cc;
 
         }
@@ -85,6 +85,13 @@ namespace PrestationApi.Controllers
 
             _codeChantierLogic.Delete(cc);
             return Ok();
+        }
+
+        [HttpPost("import")]
+        public ActionResult<IEnumerable<CodeChantier>> Import()
+        {
+            var file = Request.Form.Files[0];
+            return _codeChantierLogic.ImportExcel(file.OpenReadStream()).ToList();
         }
     }
 }

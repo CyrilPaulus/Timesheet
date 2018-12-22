@@ -29,6 +29,8 @@ import { DayDetailComponent } from './prestation/day-detail/day-detail.component
 import { AddPrestationDialogComponent } from './prestation/day-detail/add-prestation-dialog/add-prestation-dialog.component';
 import { DurationPipe } from './prestation/duration.pipe';
 import { MatSelectModule } from '@angular/material/select';
+import { ImportCodeChantierDialogComponent } from './code-chantier/import-code-chantier-dialog/import-code-chantier-dialog.component';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 
 @NgModule({
@@ -45,6 +47,7 @@ import { MatSelectModule } from '@angular/material/select';
     DayDetailComponent,
     AddPrestationDialogComponent,
     DurationPipe,
+    ImportCodeChantierDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +66,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatAutocompleteModule,
     MatSelectModule,
     FormsModule,
-    CoreModule
+    CoreModule,
+    MaterialFileInputModule
   ],
   providers: [DialogService, DurationPipe],
   bootstrap: [AppComponent],
@@ -73,7 +77,8 @@ import { MatSelectModule } from '@angular/material/select';
     ConfirmDialogComponent,
     CreateUserDialogComponent,
     EditUserDialogComponent,
-    AddPrestationDialogComponent
+    AddPrestationDialogComponent,
+    ImportCodeChantierDialogComponent
   ]
 })
 export class AppModule { }

@@ -20,13 +20,23 @@ export class CreateCodeChantierDialogComponent implements OnInit {
     return this.form.controls['description'];
   }
 
+  public get client(): AbstractControl {
+    return this.form.controls['client'];
+  }
+
+  public get produit(): AbstractControl {
+    return this.form.controls['produit'];
+  }
+
   constructor(
     private dialogRef: MatDialogRef<CreateCodeChantierDialogComponent>,
     private codeChantierService: CodeChantierService
   ) {
     this.form = new FormGroup({
       code: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required)
+      description: new FormControl('', Validators.required),
+      client: new FormControl(''),
+      produit: new FormControl('')
     })
   }
 
@@ -40,7 +50,9 @@ export class CreateCodeChantierDialogComponent implements OnInit {
   public save() {
     let description = this.description.value;
     let code = this.code.value;
-    this.codeChantierService.create(code, description).subscribe(x => {
+    let client = this.client.value;
+    let produit = this.produit.value;
+    this.codeChantierService.create(code, description, client, produit).subscribe(x => {
       this.dialogRef.close(true);
     })
 

@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PrestationApi.Models;
 
 namespace PrestationApi.Migrations
 {
     [DbContext(typeof(PrestationDbContext))]
-    partial class PrestationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181222173101_Alter-CodeChantier-Info")]
+    partial class AlterCodeChantierInfo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

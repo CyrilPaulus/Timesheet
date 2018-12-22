@@ -1,4 +1,10 @@
 
+:host {
+    
+    display: flex;
+    flex-direction: column
+}
+
 table {
     width: 100%;
 }
@@ -8,10 +14,23 @@ table {
     width: 200px;
 }
 
+.code {
+    max-width: 100px;
+    width: 100px;
+}
+
 .filter {
     padding: 20px;
 }
 
 .filter > mat-form-field {
     width: 100%;
+}
+
+.codeschantier {
+    flex-grow: 1;
+    overflow: auto;    
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 90px;
 }

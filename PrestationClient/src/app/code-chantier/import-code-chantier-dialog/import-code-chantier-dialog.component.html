@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Importer codes chantier</h2>
+<mat-dialog-content [formGroup]="form">
+
+  <mat-form-field>
+    <ngx-mat-file-input formControlName="file" placeholder="Excel file" accept=".xlsx"></ngx-mat-file-input>
+    <mat-icon matSuffix>folder</mat-icon>
+    <mat-error *ngIf="file.invalid && (file.dirty || file.touched)">
+      <span *ngIf="file.errors.required">Ce champ est requis.</span>
+    </mat-error>
+  </mat-form-field>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Annuler</button>
+  <button mat-button (click)="save()" [disabled]="!form.valid">Importer</button>
+</mat-dialog-actions>
