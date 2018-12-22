@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -29,7 +30,8 @@ namespace PrestationApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddScoped<PrestationDbContext>();
+            services.AddDbContext<PrestationDbContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<CodeChantierLogic>();
             services.AddScoped<UserLogic>();
             services.AddScoped<PresationLogic>();
@@ -63,11 +65,6 @@ namespace PrestationApi
             app.UseMvc();
             app.UseDefaultFiles();
             app.UseStaticFiles();
-
-            using (var context = new PrestationDbContext())
-            {
-                context.Database.EnsureCreated();
-            }
         }
 
 
